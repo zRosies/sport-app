@@ -6,6 +6,7 @@ export default function Footer() {
     <>
       <main>
         <p>Test32</p>
+        <h1>Oi</h1>
       </main>
     </>
   );
