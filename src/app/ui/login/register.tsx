@@ -5,6 +5,10 @@ import { MdOutlineMail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { AiOutlineLoading } from "react-icons/ai";
 
+import BlackBackground from "../utils/blackBackground";
+import SuccessfulCreation from "./sucessfulMessage";
+import { ErrorMessage } from "../utils/schema";
+
 const Register = ({
   setTranslateX,
   translate,
@@ -12,51 +16,63 @@ const Register = ({
   setTranslateX: Function;
   translate: boolean;
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<any>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [created, setAccountCreated] = useState<boolean>(false);
+  const [error, setError] = useState<ErrorMessage>({ message: "" });
 
+  // Registering user to MongoDB
   const RegisterUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (isSubmitting) {
-    //   return;
-    // }
-    // setIsSubmitting(true);
+    setError({ message: "" });
+    if (isSubmitting) {
+      return;
+    }
+    setIsSubmitting(true);
 
     const form = e.currentTarget;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const password = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
+    const passwor2 = (form.elements.namedItem("password2") as HTMLInputElement)
+      .value;
 
-    console.log(email, password);
+    if (passwor2 != password) {
+      setError({ message: "As senhas não coincidem." });
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const response = await fetch("/api/session/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: "123",
-          password: "123",
+          email: email,
+          password: password,
         }),
       });
 
-      console.log(await response.json());
+      const data = await response.json();
 
       if (response.status === 400) {
-        setError(response);
+        setError(data);
+        setIsSubmitting(false);
       }
       if (response.status == 201) {
-        setError("");
-        setIsSubmitting(true);
+        setError({ message: "" });
+        setIsSubmitting(false);
+        setAccountCreated(true);
       }
     } catch (error: any) {
-      console.log;
+      console.log(error);
     }
   };
 
   return (
     <>
       <form
-        className={`flex flex-col absolute top-2 right-2 duration-300 ${
-          !translate && "translate-x-[-500px]"
+        className={`flex flex-col absolute top-[6rem] right-2 duration-300 ${
+          !translate && "translate-x-[500px]"
         } self-center px-8 pt-3.5 pb-20 mt-12 w-full text-base text-black bg-white rounded-xl shadow-md shadow-gray-300 max-w-[398px] mx-auto`}
         onSubmit={RegisterUser}
       >
@@ -68,7 +84,7 @@ const Register = ({
           <IoIosArrowBack />
           Voltar
         </button>
-        <p className="self-center text-3xl font-bold my-5">Criar Conta</p>
+        <p className="self-center text-2xl font-bold my-5">Criar Conta</p>
         <label htmlFor="email" className="my-auto flex gap-1 items-center">
           Email
           <span>
@@ -114,6 +130,7 @@ const Register = ({
           required
           className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[42px] px-2"
         />
+        <p className="text-red-500">{error.message && error.message}</p>
         <button
           type="submit"
           disabled={isSubmitting}
@@ -127,6 +144,12 @@ const Register = ({
           )}
         </button>
       </form>
+      <BlackBackground display={created} setDisplay={setTranslateX}>
+        <SuccessfulCreation
+          setTranslateX={setTranslateX}
+          hideSuccessfulMessage={setAccountCreated}
+        />
+      </BlackBackground>
     </>
   );
 };

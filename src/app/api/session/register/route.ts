@@ -6,18 +6,15 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: any) {
   try {
-    const test: any = await req.json();
-    let password = "123";
-    let email = "123";
+    const { email, password } = await req.json();
 
-    console.log(test);
-    return NextResponse.json({ message: "it owrks" }, { status: 200 });
+    // return NextResponse.json({ message: "it owrks" }, { status: 200 });
     const userColllection = await initDb("sport-app", "users");
     const existingUser = await userColllection.findOne({ email: email });
 
     if (existingUser) {
       return NextResponse.json(
-        { message: "Email already in use" },
+        { message: "Este email já está sendo utilizado." },
         { status: 400 }
       );
     }

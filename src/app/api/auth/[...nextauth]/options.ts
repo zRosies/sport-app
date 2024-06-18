@@ -1,13 +1,10 @@
-import NextAuth, { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-// import { initClientDB } from "../../mongo/connection";
 import bcrypt from "bcryptjs";
-import { env } from "process";
+
 import { initDb } from "../../connect/mongo";
-// import { insertCredentialsInMongo } from "../../controllers/controllers";
-// import { AuthOptions } from "next-auth";
 
 const authOptions: any = {
   providers: [
@@ -23,6 +20,7 @@ const authOptions: any = {
 
         try {
           const user: any = await data.findOne({ email: credentials.email });
+          // console.log(user);
           if (user) {
             const isCorrectPassword = await bcrypt.compare(
               credentials.password,
@@ -32,6 +30,7 @@ const authOptions: any = {
               return user;
             }
           }
+          throw new Error("Incorrect email or password");
         } catch (error: any) {
           throw new Error(error);
         }
@@ -47,12 +46,20 @@ const authOptions: any = {
     }),
   ],
   callbacks: {
+    async jwt({ token, user }: { token: any; user: any }) {
+      user && (token.userId = user.userId);
+      return token;
+    },
     session: async ({ session, token }: { session: any; token: any }) => {
-      // console.log("session" + JSON.stringify(session));
-      // console.log(JSON.stringify(token));
+      // console.log("session //" + JSON.stringify(session));
+      // console.log("Token// " + JSON.stringify(token));
+
+      // Creating the userId in the session so it can be used in the frontend
       if (session?.user) {
-        session.user.sellerId = token.sub;
+        session.user.userId = token.userId;
       }
+
+      console.log(session);
 
       return session;
       // return session;
@@ -63,14 +70,14 @@ const authOptions: any = {
       }
 
       //Check if the user already exists in mongodb and adds it if it doesn't.
-      if (account?.provider === "github") {
-        const response = await insertCredentialsInMongo({ user, account });
-        return response;
-      }
-      if (account?.provider === "google") {
-        const response = await insertCredentialsInMongo({ user, account });
-        return response;
-      }
+      // if (account?.provider === "github") {
+      //   const response = await insertCredentialsInMongo({ user, account });
+      //   return response;
+      // }
+      // if (account?.provider === "google") {
+      //   const response = await insertCredentialsInMongo({ user, account });
+      //   return response;
+      // }
     },
   },
 
@@ -81,7 +88,6 @@ const authOptions: any = {
 export default authOptions;
 
 export async function ServerComponent() {
-  const session: any = await getServerSession(authOptions);
-
+  const session = await getServerSession(authOptions);
   return session;
 }
