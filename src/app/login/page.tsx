@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import LoginComponent from "../ui/login/login";
 import Register from "../ui/login/register";
 import { useState } from "react";
