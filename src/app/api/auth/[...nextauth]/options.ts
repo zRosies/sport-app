@@ -47,10 +47,6 @@ const authOptions: any = {
       clientId: process.env.FACEBOOK_CLIENT_ID!,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
     }),
-    Apple({
-      clientId: process.env.APPLE_CLIENT_ID!,
-      clientSecret: process.env.APPLE_CLIENT_SECRET!,
-    }),
   ],
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
@@ -81,7 +77,7 @@ const authOptions: any = {
         const response = await createUser({ externalUser: user });
         return response;
       }
-      // if (account?.provider === "google") {
+      // if (account?.provider === "apple") {
       //   const response = await insertCredentialsInMongo({ user, account });
       //   return response;
       // }
