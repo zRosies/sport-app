@@ -2,9 +2,12 @@ import { getServerSession } from "next-auth/next";
 import Credentials from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import Facebook from "next-auth/providers/facebook";
+import Apple from "next-auth/providers/apple";
 import bcrypt from "bcryptjs";
 
 import { initDb } from "../../connect/mongo";
+import { createUser } from "../../controllers/users";
 
 const authOptions: any = {
   providers: [
@@ -40,9 +43,13 @@ const authOptions: any = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    GithubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
+    Facebook({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+    }),
+    Apple({
+      clientId: process.env.APPLE_CLIENT_ID!,
+      clientSecret: process.env.APPLE_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
@@ -69,11 +76,11 @@ const authOptions: any = {
         return true;
       }
 
-      //Check if the user already exists in mongodb and adds it if it doesn't.
-      // if (account?.provider === "github") {
-      //   const response = await insertCredentialsInMongo({ user, account });
-      //   return response;
-      // }
+      // //Check if the user already exists in mongodb and adds it if it doesn't.
+      if (account?.provider === "facebook") {
+        const response = await createUser({ externalUser: user });
+        return response;
+      }
       // if (account?.provider === "google") {
       //   const response = await insertCredentialsInMongo({ user, account });
       //   return response;

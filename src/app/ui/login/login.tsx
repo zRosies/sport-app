@@ -111,26 +111,33 @@ export default function LoginComponent({
         <div className="flex gap-3 flex-col w-full max-w-[324px]">
           <button
             type="button"
-            className="flex gap-2.5  px-5 py-2  w-full text-white bg-[#1278FF] rounded-[8px]"
+            className="flex gap-2.5 px-5 py-2 w-full text-[#242424] bg-amber-50 rounded-[8px] hover"
+          >
+            <GoogleIcon />
+            <p
+              className="mx-auto font-semibold "
+              onClick={() => signIn("google")}
+            >
+              Logar com Google
+            </p>
+          </button>
+          <button
+            onClick={() => signIn("facebook")}
+            type="button"
+            className="flex gap-1  px-5 py-2  w-full text-white bg-[#1278FF] rounded-[8px] font-semibold"
           >
             <FacebookIcon />
             <p className="mx-auto">Logar com Facebook</p>
           </button>
-          <button
-            type="button"
-            className="flex gap-2.5 px-4 py-2 w-full text-black bg-amber-50 rounded-[8px] hover"
-          >
-            <GoogleIcon />
-            <p className="mx-auto ">Logar com Google</p>
-          </button>
 
-          <button
+          {/* <button
             type="button"
             className="flex gap-2.5 px-5 py-2  w-full text-white rounded-[8px] bg-zinc-900 "
+            onClick={() => signIn("apple")}
           >
             <Apple />
             <p className="mx-auto">Logar com Apple</p>
-          </button>
+          </button> */}
         </div>
       </div>
     </>
