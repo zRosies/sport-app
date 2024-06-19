@@ -72,7 +72,6 @@ export default function LoginComponent({
             </span>
           </label>
           <input
-            value={"gustavo.enrollment@gmail.com"}
             className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[42px]"
             name="email"
             id="email"
@@ -88,7 +87,6 @@ export default function LoginComponent({
             id="password"
             type="password"
             className="shrink-0 mt-2 rounded-sm bg-zinc-100 h-[42px]"
-            value={123}
           />
           <button
             type="submit"

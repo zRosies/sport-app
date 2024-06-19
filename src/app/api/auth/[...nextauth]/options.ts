@@ -56,16 +56,11 @@ const authOptions: any = {
     session: async ({ session, token }: { session: any; token: any }) => {
       // console.log("session //" + JSON.stringify(session));
       // console.log("Token// " + JSON.stringify(token));
-
       // Creating the userId in the session so it can be used in the frontend
       if (session?.user) {
         session.user.userId = token.userId;
       }
-
-      console.log(session);
-
       return session;
-      // return session;
     },
     async signIn({ user, account }: { user: any; account: any }) {
       if (account?.provider === "credentials") {
@@ -77,10 +72,10 @@ const authOptions: any = {
         const response = await createUser({ externalUser: user });
         return response;
       }
-      // if (account?.provider === "apple") {
-      //   const response = await insertCredentialsInMongo({ user, account });
-      //   return response;
-      // }
+      if (account?.provider === "google") {
+        const response = await createUser({ externalUser: user });
+        return response;
+      }
     },
   },
 
