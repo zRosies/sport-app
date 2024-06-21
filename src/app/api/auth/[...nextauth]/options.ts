@@ -50,7 +50,10 @@ const authOptions: any = {
   ],
   callbacks: {
     async jwt({ token, user }: { token: any; user: any }) {
-      user && (token.userId = user.userId);
+      if (user) {
+        token.userId = user.userId;
+      }
+
       return token;
     },
     session: async ({ session, token }: { session: any; token: any }) => {
@@ -60,6 +63,8 @@ const authOptions: any = {
       if (session?.user) {
         session.user.userId = token.userId;
       }
+      // console.log(session);
+
       return session;
     },
     async signIn({ user, account }: { user: any; account: any }) {
@@ -69,12 +74,15 @@ const authOptions: any = {
 
       // //Check if the user already exists in mongodb and adds it if it doesn't.
       if (account?.provider === "facebook") {
-        const response = await createUser({ externalUser: user });
-        return response;
+        const response: any = await createUser({ externalUser: user });
+        // Adding the userId in the session so it can be used in the frontend
+        user.userId = response.userId;
+        return true;
       }
       if (account?.provider === "google") {
-        const response = await createUser({ externalUser: user });
-        return response;
+        const response: any = await createUser({ externalUser: user });
+        user.userId = response.userId;
+        return true;
       }
     },
   },
@@ -85,7 +93,9 @@ const authOptions: any = {
 
 export default authOptions;
 
-export async function ServerComponent() {
+// Passing the userInfo to the session in the server
+
+export async function sessionInfo() {
   const session = await getServerSession(authOptions);
   return session;
 }

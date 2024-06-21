@@ -22,7 +22,7 @@ export async function createUser({
     });
 
     if (existingUser) {
-      return true;
+      return existingUser;
     }
 
     const newUser = {
@@ -41,8 +41,11 @@ export async function createUser({
         cep: "",
       },
     };
-    await userColllection.insertOne(newUser);
-    return true;
+    const user = await userColllection.insertOne(newUser);
+    const response = await userColllection.findOne({
+      _id: user.insertedId,
+    });
+    return response;
   }
   //----------------------------------------------------------------------------
 
@@ -90,4 +93,14 @@ export async function createUser({
     { message: "User created successfully" },
     { status: 201 }
   );
+}
+
+export default async function GetUserInfo(userId: string) {
+  const userColllection = await initDb("sport-app", "users");
+  const existingUser = await userColllection.findOne({ userId: userId });
+  if (!existingUser) {
+    return NextResponse.json({ message: "User not Found." }, { status: 400 });
+  }
+
+  return NextResponse.json(existingUser, { status: 200 });
 }

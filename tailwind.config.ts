@@ -15,6 +15,8 @@ const config: Config = {
       },
       backgroundColor: {
         primary: "#197967",
+        secondary: "#1FA96F",
+        third: "#D8E9FF",
       },
       animation: {
         loading: "loading .8s linear infinite",
