@@ -1,7 +1,7 @@
 import { FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
-
+ 
 const Footer = () => {
   return (
     <>

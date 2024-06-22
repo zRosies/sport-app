@@ -70,7 +70,6 @@ export async function createUser({
     phone: "",
     picture: "",
     cpf: "",
-    gender: "",
     address: {
       uf: "",
       city: "",
@@ -93,6 +92,23 @@ export async function createUser({
     { message: "User created successfully" },
     { status: 201 }
   );
+}
+
+export async function updateUser(user: User) {
+  const userColllection = await initDb("sport-app", "users");
+  const response = await userColllection.updateOne(
+    { userId: user.userId },
+    { $set: user }
+  );
+
+  if (response.modifiedCount > 0) {
+    return NextResponse.json(
+      { message: "User updated successfully" },
+      { status: 200 }
+    );
+  }
+
+  return NextResponse.json({ message: "Error updating user" }, { status: 500 });
 }
 
 export default async function GetUserInfo(userId: string) {

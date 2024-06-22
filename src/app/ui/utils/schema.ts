@@ -17,7 +17,6 @@ export interface User {
   phone: string;
   picture: string;
   cpf: string;
-  gender: string;
   time: string;
 
   address: {

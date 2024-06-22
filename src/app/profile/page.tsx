@@ -8,9 +8,10 @@ import { NextResponse } from "next/server";
 
 export default async function Profile() {
   const session: any = await sessionInfo();
-  console.log(session);
+  // console.log(session);
   const response: NextResponse = await GetUserInfo(session.user.userId);
   const userInfo: User = await response.json();
+  // const userInfo: any = [];
 
   // console.log(userInfo);
 
