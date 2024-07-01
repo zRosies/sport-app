@@ -5,12 +5,12 @@ import variable from "./styles/variables.module.scss";
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col items-center justify-center w-full min-h-screen p-4">
-        <div className="w-full text-center mb-6">
-          <h1 className="text-3xl font-bold text-black">APRENDA COM OS PRO'S</h1>
-        </div>
+      <main className="flex flex-col items-center justify-center w-full min-h-screen p-4 pt-20">
         <div className="flex flex-col lg:flex-row gap-5 w-full max-w-7xl items-center">
           <section className="text-xl text-center text-black flex-1 flex flex-col items-center">
+            <h1 className="text-3xl font-bold text-black">
+              APRENDA COM OS <span className="text-blue-500">PRO'S</span>
+            </h1>
             <p>Escolha seu esporte e professor, aprenda no seu horário.</p>
             <div className="mt-4 space-x-4">
               <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Saiba mais</button>
@@ -25,7 +25,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-6 w-full max-w-7xl">
+        <div className="flex flex-col gap-5 mt-6 w-full max-w-7xl">
           {[
             { id: 1, sport: "BASQUETE", imgSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&", alt: "Uma imagem representando basquete" },
             { id: 2, sport: "FUTEBOL", imgSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&", alt: "Uma imagem representando futebol" },
