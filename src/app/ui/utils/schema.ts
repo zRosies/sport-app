@@ -20,8 +20,9 @@ export interface User {
   time: string;
 
   address: {
-    uf: string;
-    city: string;
-    cep: string;
+    addressLine?: string;
+    uf?: string;
+    city?: string;
+    cep?: string;
   };
 }

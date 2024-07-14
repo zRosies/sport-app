@@ -8,10 +8,13 @@ import FormBreadcumb1 from "./formBreakcumb1";
 import { IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
 import FormBreadcumb2 from "./formBreadcumb2";
+import BlackBackground from "../utils/blackBackground";
+import SuccessUpdateMessage from "./sucessUpdateMessage";
 
 const ProfileInfo = ({ user }: { user: User }) => {
   // const session = useSession();
   const [translateX, setTranslateX] = useState<boolean>(false);
+  const [sucessMessage, setSuccessMessage] = useState<boolean>(false);
   // console.log(session);
 
   async function updateProfile(e: any) {
@@ -26,6 +29,7 @@ const ProfileInfo = ({ user }: { user: User }) => {
       cpf: e.target.elements.namedItem("cpf")?.value,
       password: e.target.elements.namedItem("password")?.value,
       address: {
+        addressLine: e.target.elements.namedItem("address")?.value,
         uf: e.target.elements.namedItem("uf")?.value,
         city: e.target.elements.namedItem("city")?.value,
         cep: e.target.elements.namedItem("cep")?.value,
@@ -33,14 +37,28 @@ const ProfileInfo = ({ user }: { user: User }) => {
       time: user.time,
       userId: user.userId,
     };
-    console.log(updateUser);
+
+    const response = await fetch("/api/user", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateUser),
+    });
+
+    if (response.ok) {
+      console.log(response);
+      setSuccessMessage(true);
+    }
   }
 
   return (
     <>
-      <button onClick={() => signOut()}>Sign out</button>
-      <p className="font-bold">PERFIL</p>
-      <p>Bem-vindo(a), {user.fullName}</p>
+      <div className="mx-4 md:mx-[5rem] my-6">
+        <button onClick={() => signOut()}>Sign out</button>
+        <p className="font-bold">PERFIL</p>
+        <p>Bem-vindo(a), {user.fullName}</p>
+      </div>
 
       <section className="flex flex-col md:flex-row md:justify-evenly md:items-start w-[100%] my-12">
         <div className="w-[360px] mx-auto md:mx-0 flex flex-col items-center">
@@ -89,6 +107,12 @@ const ProfileInfo = ({ user }: { user: User }) => {
               </button>
             </div>
           </form>
+          <BlackBackground
+            display={sucessMessage}
+            setDisplay={setSuccessMessage}
+          >
+            <SuccessUpdateMessage hideSuccessfulMessage={setSuccessMessage} />
+          </BlackBackground>
         </div>
         <section className="flex flex-col gap-[8rem] mt-20 align-center md:pl-[6rem] md:border-l mx-6">
           <div>

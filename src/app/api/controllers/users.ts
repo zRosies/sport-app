@@ -36,6 +36,7 @@ export async function createUser({
       cpf: "",
       gender: "",
       address: {
+        addressLine: "",
         uf: "",
         city: "",
         cep: "",
@@ -98,7 +99,7 @@ export async function updateUser(user: User) {
   const userColllection = await initDb("sport-app", "users");
   const response = await userColllection.updateOne(
     { userId: user.userId },
-    { $set: user }
+    { $set: { ...user } }
   );
 
   if (response.modifiedCount > 0) {
