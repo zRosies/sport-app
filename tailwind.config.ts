@@ -17,6 +17,7 @@ const config: Config = {
         primary: "#197967",
         secondary: "#1FA96F",
         third: "#D8E9FF",
+        forth: "#0675C5",
       },
       animation: {
         loading: "loading .8s linear infinite",

@@ -26,3 +26,5 @@ export interface User {
     cep?: string;
   };
 }
+
+export interface School {}
