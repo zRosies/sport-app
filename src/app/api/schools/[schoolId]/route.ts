@@ -6,7 +6,7 @@ export async function GET(req: Request, context: any) {
 
   if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
     return NextResponse.json(
-      { message: "You have no token to perform this operation" },
+      { message: "You have no permission to perform this operation" },
       { status: 403 }
     );
   }

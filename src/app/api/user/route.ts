@@ -7,7 +7,7 @@ export async function POST(req: any) {
 
   if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
     return NextResponse.json(
-      { message: "You have no token to perform this operation" },
+      { message: "You have no permission to perform this operation" },
       { status: 403 }
     );
   }
@@ -25,7 +25,7 @@ export async function PUT(req: Request) {
 
   if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
     return NextResponse.json(
-      { message: "You have no token to perform this operation" },
+      { message: "You have no permission to perform this operation" },
       { status: 403 }
     );
   }
