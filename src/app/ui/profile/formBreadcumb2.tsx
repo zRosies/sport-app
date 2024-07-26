@@ -23,7 +23,7 @@ const FormBreadcumb2 = ({
           type="tel"
           id="phone"
           name="phone"
-          defaultValue={user.phone}
+          defaultValue={user?.phone}
           required
         />
 
@@ -33,7 +33,7 @@ const FormBreadcumb2 = ({
           type="text"
           id="address"
           name="address"
-          defaultValue={user.address.addressLine}
+          defaultValue={user?.address?.addressLine}
           required
         />
 
@@ -43,7 +43,7 @@ const FormBreadcumb2 = ({
           type="text"
           id="city"
           name="city"
-          defaultValue={user.address.city}
+          defaultValue={user?.address?.city}
           required
         />
         <label htmlFor="cep">CEP:</label>
@@ -52,7 +52,7 @@ const FormBreadcumb2 = ({
           type="text"
           id="cep"
           name="cep"
-          defaultValue={user.address.cep}
+          defaultValue={user?.address?.cep}
           required
         />
         <label htmlFor="uf">Estado (UF):</label>
@@ -61,7 +61,7 @@ const FormBreadcumb2 = ({
           id="uf"
           name="uf"
           required
-          defaultValue={user.address.uf}
+          defaultValue={user?.address?.uf}
         >
           <option value="">Select a state</option>
           <option value="AC">AC</option>

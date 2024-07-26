@@ -76,12 +76,14 @@ const authOptions: any = {
       if (account?.provider === "facebook") {
         const response: any = await createUser({ externalUser: user });
         // Adding the userId in the session so it can be used in the frontend
-        user.userId = response.userId;
+        const json = await response.json();
+        user.userId = json.userId;
         return true;
       }
       if (account?.provider === "google") {
         const response: any = await createUser({ externalUser: user });
-        user.userId = response.userId;
+        const json = await response.json();
+        user.userId = json.userId;
         return true;
       }
     },

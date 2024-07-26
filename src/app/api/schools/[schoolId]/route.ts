@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import getSchoolInfo from "../../controllers/school";
+import { getSchoolInfo } from "../../controllers/school";
 
 export async function GET(req: Request, context: any) {
   const apiKey = req.headers.get("apiKey");
