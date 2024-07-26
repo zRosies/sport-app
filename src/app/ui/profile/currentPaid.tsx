@@ -7,7 +7,7 @@ const CurrentPaid = () => {
       <div className="flex justify-center flex-col items-center mx-auto">
         <SuccessIcon />
         <p className="font-semibold text-center md:text-2xl text-green-500">
-          Todos os pagementos estão em dia
+          Todos os pagamentos estão em dia
         </p>
         <p className="text-[0.8rem] md:text-[1rem]">
           Parabéns, todos seus pagamentos estão em dia.

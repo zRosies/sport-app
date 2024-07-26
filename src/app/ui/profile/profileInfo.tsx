@@ -12,10 +12,8 @@ import BlackBackground from "../utils/blackBackground";
 import SuccessUpdateMessage from "./sucessUpdateMessage";
 
 const ProfileInfo = ({ user }: { user: User }) => {
-  // const session = useSession();
   const [translateX, setTranslateX] = useState<boolean>(false);
   const [sucessMessage, setSuccessMessage] = useState<boolean>(false);
-  // console.log(session);
 
   async function updateProfile(e: any) {
     e.preventDefault();
@@ -42,9 +40,11 @@ const ProfileInfo = ({ user }: { user: User }) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        apiKey: `${process.env.NEXT_PUBLIC_API_TOKEN}`,
       },
       body: JSON.stringify(updateUser),
     });
+    console.log(response);
 
     if (response.ok) {
       console.log(response);

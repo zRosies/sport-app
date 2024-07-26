@@ -22,7 +22,7 @@ export async function POST(req: any) {
 }
 export async function PUT(req: Request) {
   const apiKey = req.headers.get("apiKey");
-
+  console.log(apiKey);
   if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
     return NextResponse.json(
       { message: "You have no permission to perform this operation" },

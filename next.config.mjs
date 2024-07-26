@@ -3,6 +3,8 @@
 import path from "path";
 
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     remotePatterns: [
       {
