@@ -33,10 +33,17 @@ export default function SchoolsMain({
 }) {
   const [allSchools, setSchools] = useState<School[]>(schools);
 
+  // console.log(schools.length);
+  // console.log(schools.length);
+  // console.log(userId);
   // console.log(schools.map((school) => school));
 
-  async function searchSchools(e: any) {
-    const searchValue = e.target.value;
+  async function searchSchools(value: string) {
+    const filteredSchools = schools.filter((school) =>
+      school.name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setSchools(filteredSchools);
     // TODO: Search schools based on searchValue
   }
   return (
@@ -44,19 +51,19 @@ export default function SchoolsMain({
       <div className="">
         <h1 className="font-bold  text-[.75rem]">CADASTRE-SE</h1>
         <p>Procure sua instituição e comece seu esporte já.</p>
-        <form action="" className="mt-4">
-          <label htmlFor="search" className="flex p-2 shadow-md rounded-lg">
-            <input
-              type="text"
-              placeholder="Procurar..."
-              className="w-full mr-5 outline-none"
-            />
-            <button className="bg-secondary text-white p-3 rounded-[50%] hover:bg-primary duration-200">
-              {/* @ts-ignore */}
-              <IoSearchOutline className="h-5 w-5" />
-            </button>
-          </label>
-        </form>
+        <form action=""></form>
+        <label htmlFor="search" className="flex p-2 shadow-md rounded-lg">
+          <input
+            type="text"
+            name="search"
+            placeholder="Procurar..."
+            className="w-full mr-5 outline-none"
+          />
+          <button className="bg-secondary text-white p-3 rounded-[50%] hover:bg-primary duration-200">
+            {/* @ts-ignore */}
+            <IoSearchOutline className="h-5 w-5" />
+          </button>
+        </label>
       </div>
 
       <div
@@ -92,7 +99,7 @@ export default function SchoolsMain({
             type="button"
             className="bg-[#197967] hover:bg-[#308d7c] duration-200 text-white w-[200px] p-3 mx-auto rounded-md font-semibold"
             onClick={() => {
-              window.scrollTo({ top: -200, behavior: "smooth" });
+              window.scrollTo({ top: 1000, behavior: "smooth" });
             }}
           >
             Inscrever-me

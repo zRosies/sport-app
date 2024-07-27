@@ -28,7 +28,21 @@ const AllSchools = ({ school, userId }: { school: School; userId: string }) => {
     <>
       <div className="flex justify-between px-4 items-center shadow-lg rounded-md py-5 ">
         <div className="flex items-center gap-5">
-          <div className=" h-12 w-12 md:h-14 md:w-14 py-4 px-2 rounded-[50%] bg-blue-500" />
+          {school.logo_pic ? (
+            <Image
+              src={`${school.logo_pic}`}
+              alt={school.name}
+              width={100}
+              height={100}
+            />
+          ) : (
+            <div className=" h-12 w-12 md:h-14 md:w-14 py-4 px-2 rounded-[50%] bg-blue-500 items-center justify-center flex text-white">
+              <p className="font-semibold">
+                {school.name.slice(0, 1).toUpperCase() +
+                  school.name.slice(1, 2).toUpperCase()}
+              </p>
+            </div>
+          )}
           <p className="font-semibold">{school.name}</p>
         </div>
 
