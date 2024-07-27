@@ -3,9 +3,11 @@ import { IoSearchOutline } from "react-icons/io5";
 import UserSchools from "./userSchools";
 import AllSchools from "./allSchools";
 import { useState } from "react";
+import BallIcon from "../icons/ball";
 
 export interface School {
   _id: string;
+  id: string;
   logo_pic: string;
   modalities: [
     {
@@ -31,7 +33,6 @@ export default function SchoolsMain({
 }) {
   const [allSchools, setSchools] = useState<School[]>(schools);
 
-  console.log(userId);
   // console.log(schools.map((school) => school));
 
   async function searchSchools(e: any) {
@@ -59,7 +60,7 @@ export default function SchoolsMain({
       </div>
 
       <div
-        className="max-h-[330px] overflow-y-scroll my-4 flex-col gap-6 flex shadow-lg rounded-md md:px-5 md:py-7"
+        className="max-h-[330px] overflow-y-scroll my-4 flex-col gap-6 flex  rounded-md md:px-5 md:py-7"
         style={{ scrollbarWidth: "thin", scrollbarColor: "#fafafa" }}
       >
         {allSchools.map((school, index) => (
@@ -68,18 +69,36 @@ export default function SchoolsMain({
       </div>
 
       <h1 className="font-bold text-[.75rem]">MINHAS INSTITUIÇÕES</h1>
-      <div
-        className="max-h-[300px] overflow-y-scroll my-4 gap-5 flex flex-col shadow-lg rounded-md md:px-5 md:py-7"
-        style={{ scrollbarWidth: "thin", scrollbarColor: "#fafafa" }}
-      >
-        {schools?.map(
-          (school, index) =>
-            school?.enrolled?.includes(userId) ? (
-              <UserSchools key={index} school={school} />
-            ) : null
-          // <UserSchools key={index} school={school} />
-        )}
-      </div>
+      {schools.some((school) => school.enrolled.includes(userId)) ? (
+        <div
+          className="max-h-[300px] overflow-y-scroll my-4 gap-5 flex flex-col rounded-md md:px-5 md:py-7"
+          style={{ scrollbarWidth: "thin", scrollbarColor: "#fafafa" }}
+        >
+          {schools?.map(
+            (school, index) =>
+              school?.enrolled?.includes(userId) ? (
+                <UserSchools key={index} school={school} />
+              ) : null
+            // <UserSchools key={index} school={school} />
+          )}
+        </div>
+      ) : (
+        <div className="flex justify-center flex-col  ">
+          <p className="text-center">
+            Não se inscreveu em nenhuma instituição ainda?
+          </p>
+          <BallIcon />
+          <button
+            type="button"
+            className="bg-[#197967] hover:bg-[#308d7c] duration-200 text-white w-[200px] p-3 mx-auto rounded-md font-semibold"
+            onClick={() => {
+              window.scrollTo({ top: -200, behavior: "smooth" });
+            }}
+          >
+            Inscrever-me
+          </button>
+        </div>
+      )}
     </main>
   );
 }

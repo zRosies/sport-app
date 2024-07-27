@@ -10,6 +10,7 @@ export async function getSchoolInfo(schoolId: string) {
     logo_pic: 1,
     enrolled: 1,
     subscriptions: 1,
+    id: 1,
   };
   const existingSchool = await userColllection.findOne(
     { id: schoolId },
@@ -37,6 +38,7 @@ export async function getAllSchools() {
           logo_pic: 1,
           enrolled: 1,
           subscriptions: 1,
+          id: 1,
         },
       }
     )
@@ -50,6 +52,8 @@ export async function sendSubscription(schoolId: string, userId: string) {
     { id: schoolId },
     { $push: { subscriptions: userId } }
   );
+
+  console.log(userId, schoolId);
 
   if (response.modifiedCount < 1) {
     return NextResponse.json(
