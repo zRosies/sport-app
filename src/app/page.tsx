@@ -5,14 +5,15 @@ import variable from "./styles/variables.module.scss";
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col items-center justify-center w-full min-h-screen p-4 pt-20">
+      <main className="flex flex-col items-center justify-center w-full min-h-screen p-4 pt-20 my-12 gap-[120px]">
         <div className="flex flex-col lg:flex-row gap-5 w-full max-w-7xl items-center">
-          <section className="text-xl text-center text-black flex-1 flex flex-col items-center">
-            <h1 className="text-3xl font-bold text-black">
-              APRENDA COM OS <span className="text-blue-500">PRO'S</span>
+          <section className="text-xl flex-1 flex flex-col gap-[5px]">
+            <p className="text-[18px] mb-[-5px]">Eleve seu jogo</p>
+            <h1 className="text-[40px] font-extrabold text-black text-start w-[60%] leading-10">
+              APRENDA <span className="text-blue-500">COM</span> OS <span className="text-blue-500">PRO'S</span>
             </h1>
-            <p>Escolha seu esporte e professor, aprenda no seu horário.</p>
-            <div className="mt-4 space-x-4">
+            <p className="w-[60%] text-center mt-[40px] mx-auto">Escolha seu esporte e professor, aprenda no seu horário.</p>
+            <div className="flex justify-center mt-4 space-x-4">
               <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Saiba mais</button>
               <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Começar</button>
             </div>
