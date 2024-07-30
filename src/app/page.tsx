@@ -19,10 +19,10 @@ export default function Home() {
               Escolha seu esporte e professor, aprenda no seu horário.
             </p>
             <div className="flex justify-center mt-4 space-x-4 mx-auto">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+              <button className="px-4 py-2 text-black border-[1px] border-black rounded hover:bg-[#0675C5] hover:text-white hover:border-[#0675C5] duration-200 w-[140px]">
                 Saiba mais
               </button>
-              <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
+              <button className="px-4 py-2 bg-[#197967] text-white rounded hover:bg-[#1ABF7A] hover:border-[#1ABF7A] duration-200 w-[140px]">
                 Começar
               </button>
             </div>
@@ -36,45 +36,20 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-col gap-5 mt-6 w-full max-w-7xl">
-          {[
-            {
-              id: 1,
-              sport: "BASQUETE",
-              imgSrc:
-                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&",
-              alt: "Uma imagem representando basquete",
-            },
-            {
-              id: 2,
-              sport: "FUTEBOL",
-              imgSrc:
-                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&",
-              alt: "Uma imagem representando futebol",
-            },
-            {
-              id: 3,
-              sport: "VÔLEI",
-              imgSrc:
-                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&",
-              alt: "Uma imagem representando vôlei",
-            },
-          ].map(({ id, sport, imgSrc, alt }) => (
             <a
-              key={id}
               href=""
-              className="relative w-full h-[172px] focus:outline-none transition transform hover:scale-105 active:scale-95 rounded-[33px] overflow-hidden block"
+              className="relative w-full h-[172px] rounded-[33px] overflow-hidden bg-[black]"
             >
               <img
                 loading="lazy"
-                src={imgSrc}
-                alt={alt}
-                className="object-cover w-full h-full"
+                src={"https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&"}
+                alt={"imagem de esporte"}
+                className="object-cover w-full h-full hover:scale-110 duration-200"
               />
-              <div className="absolute inset-0 bg-neutral-900 bg-opacity-60 flex items-center justify-center">
-                <span className="text-white font-bold">{sport}</span>
-              </div>
+              {/* <div className="absolute inset-0 bg-neutral-900 bg-opacity-60 flex items-center justify-center">
+                <span className="text-white font-bold">Basquete</span>
+              </div> */}
             </a>
-          ))}
         </div>
         <div className="w-full max-w-7xl mt-12 lg:mt-24">
           <h2 className="text-2xl font-bold mb-4 text-left">Horários</h2>
