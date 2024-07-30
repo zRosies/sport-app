@@ -6,18 +6,27 @@ export default function Home() {
   return (
     <>
       <main className="flex flex-col items-center justify-center w-full min-h-screen p-4 pt-20 my-12 gap-[120px]">
-        <div className="flex flex-col lg:flex-row gap-5 w-full max-w-7xl items-center">
-          <section className="text-xl flex-1 flex flex-col gap-[5px]">
-            <p className="text-[18px] mb-[-5px]">Eleve seu jogo</p>
-            <h1 className="text-[40px] font-extrabold text-black text-start w-[60%] leading-10">
-              APRENDA <span className="text-blue-500">COM</span> OS <span className="text-blue-500">PRO'S</span>
+        <div className="flex flex-col lg:flex-row gap-5 w-full max-w-7xl items-center justify-between">
+          <div className="text-xl flex-1 flex flex-col gap-[5px] items-start max-w-[500px]">
+            <p className="text-[16px] ml-2   mb-[-5px] text-start">
+              Eleve seu jogo
+            </p>
+            <h1 className="text-[40px] ml-2  font-extrabold text-black text-start w-[100%] leading-10">
+              APRENDA <span className="text-blue-500">COM</span> OS{" "}
+              <span className="text-blue-500">{`PRO'S`}</span>
             </h1>
-            <p className="w-[60%] text-center mt-[40px] mx-auto">Escolha seu esporte e professor, aprenda no seu horário.</p>
-            <div className="flex justify-center mt-4 space-x-4">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Saiba mais</button>
-              <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">Começar</button>
+            <p className="w-[100%] mt-[40px] text-center">
+              Escolha seu esporte e professor, aprenda no seu horário.
+            </p>
+            <div className="flex justify-center mt-4 space-x-4 mx-auto">
+              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                Saiba mais
+              </button>
+              <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
+                Começar
+              </button>
             </div>
-          </section>
+          </div>
           <div className="flex-1">
             <img
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e4fd0d4e29fd05c7f114a5386695f313b4af131fb3099907d7c0538b1df0c42?apiKey=5366c3b10aa44bf192572735faff851c&"
@@ -28,9 +37,27 @@ export default function Home() {
         </div>
         <div className="flex flex-col gap-5 mt-6 w-full max-w-7xl">
           {[
-            { id: 1, sport: "BASQUETE", imgSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&", alt: "Uma imagem representando basquete" },
-            { id: 2, sport: "FUTEBOL", imgSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&", alt: "Uma imagem representando futebol" },
-            { id: 3, sport: "VÔLEI", imgSrc: "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&", alt: "Uma imagem representando vôlei" },
+            {
+              id: 1,
+              sport: "BASQUETE",
+              imgSrc:
+                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&",
+              alt: "Uma imagem representando basquete",
+            },
+            {
+              id: 2,
+              sport: "FUTEBOL",
+              imgSrc:
+                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&",
+              alt: "Uma imagem representando futebol",
+            },
+            {
+              id: 3,
+              sport: "VÔLEI",
+              imgSrc:
+                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&",
+              alt: "Uma imagem representando vôlei",
+            },
           ].map(({ id, sport, imgSrc, alt }) => (
             <a
               key={id}
@@ -61,7 +88,8 @@ export default function Home() {
             </div>
             <div className="lg:ml-10 mt-6 lg:mt-0 flex-1 flex flex-col items-center lg:items-center text-center">
               <h3 className="text-xl font-semibold">
-                Aqui você faz o seu <span className="text-blue-500">horário</span>
+                Aqui você faz o seu{" "}
+                <span className="text-blue-500">horário</span>
               </h3>
               <p className="mt-2">Escolha seu horário e comece já.</p>
             </div>
@@ -81,7 +109,9 @@ export default function Home() {
               <h3 className="text-xl font-semibold">
                 Maximização da <span className="text-blue-500">eficiência</span>
               </h3>
-              <p className="mt-2">Otimize seu tempo e esforço com nossas técnicas comprovadas.</p>
+              <p className="mt-2">
+                Otimize seu tempo e esforço com nossas técnicas comprovadas.
+              </p>
             </div>
           </div>
         </div>
