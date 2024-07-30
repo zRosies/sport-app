@@ -18,13 +18,16 @@ export interface User {
   picture: string;
   cpf: string;
   time: string;
-
   address: {
     addressLine?: string;
     uf?: string;
     city?: string;
     cep?: string;
   };
+}
+
+export interface userAdmin extends User {
+  role: string;
 }
 
 export interface School {}
