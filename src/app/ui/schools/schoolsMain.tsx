@@ -47,7 +47,7 @@ export default function SchoolsMain({
     // TODO: Search schools based on searchValue
   }
   return (
-    <main className="mx-4 flex flex-col gap-6 max-w-[600px] md:mx-auto my-12">
+    <main className="mx-4 flex flex-col gap-6 max-w-[600px] md:mx-auto my-[120px]">
       <div className="">
         <h1 className="font-bold  text-[.75rem]">CADASTRE-SE</h1>
         <p>Procure sua instituição e comece seu esporte já.</p>
@@ -59,7 +59,7 @@ export default function SchoolsMain({
             placeholder="Procurar..."
             className="w-full mr-5 outline-none"
           />
-          <button className="bg-secondary text-white p-3 rounded-[50%] hover:bg-primary duration-200">
+          <button className="bg-secondary text-white p-3 rounded-[50%] hover:bg-primary duration-200 se">
             {/* @ts-ignore */}
             <IoSearchOutline className="h-5 w-5" />
           </button>

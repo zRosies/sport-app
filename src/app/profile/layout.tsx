@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Comece já seu gerenciamento por profissionais dedicados a vida esportiva",
 };
 
-export default async function LoginLayoyt({ children }: any) {
+export default async function ProfileLayout({ children }: any) {
   const session = await sessionInfo();
   // console.log(session);
   if (session == null) {

@@ -17,7 +17,7 @@ export default async function LoginLayoyt({ children }: any) {
 
   return (
     <>
-      <main>{children}</main>
+      <main className="my-16">{children}</main>
     </>
   );
 }

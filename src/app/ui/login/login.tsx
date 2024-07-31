@@ -94,18 +94,19 @@ export default function LoginComponent({
           >
             Entrar
           </button>
-          <div className="flex gap-2 self-center mt-2 text-[0.95rem]">
-            <div className="flex-auto text-black">Não tem uma conta?</div>
-            <button
-              type="button"
-              className="text-blue-700 hover:underline"
+        </form>
+        <div className="flex gap-2 self-center text-[0.95rem] flex-col my-6">
+          <p className=" text-black">
+            Não tem uma conta?{" "}
+            <span
+              className="text-blue-500 hover:underline cursor-pointer"
               onClick={() => setTranslateX((prev: boolean) => !prev)}
             >
               Criar conta
-            </button>
-          </div>
-          <div className="self-center text-black my-5">ou</div>
-        </form>
+            </span>
+          </p>
+          <p className="self-center text-black ">ou</p>
+        </div>
         <div className="flex gap-3 flex-col w-full max-w-[324px]">
           <button
             type="button"
@@ -127,15 +128,6 @@ export default function LoginComponent({
             <FacebookIcon />
             <p className="mx-auto">Logar com Facebook</p>
           </button>
-
-          {/* <button
-            type="button"
-            className="flex gap-2.5 px-5 py-2  w-full text-white rounded-[8px] bg-zinc-900 "
-            onClick={() => signIn("apple")}
-          >
-            <Apple />
-            <p className="mx-auto">Logar com Apple</p>
-          </button> */}
         </div>
       </div>
     </>

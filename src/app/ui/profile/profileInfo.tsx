@@ -53,9 +53,8 @@ const ProfileInfo = ({ user }: { user: User }) => {
   }
 
   return (
-    <>
+    <main className="my-[120px]">
       <div className="mx-4 md:mx-[5rem] my-6">
-        <button onClick={() => signOut()}>Sign out</button>
         <p className="font-bold">PERFIL</p>
         <p>Bem-vindo(a), {user.fullName}</p>
       </div>
@@ -123,7 +122,7 @@ const ProfileInfo = ({ user }: { user: User }) => {
           </div>
         </section>
       </section>
-    </>
+    </main>
   );
 };
 
