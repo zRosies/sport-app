@@ -36,20 +36,22 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-col gap-5 mt-6 w-full max-w-7xl">
-            <a
-              href=""
-              className="relative w-full h-[172px] rounded-[33px] overflow-hidden bg-[black]"
-            >
-              <img
-                loading="lazy"
-                src={"https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&"}
-                alt={"imagem de esporte"}
-                className="object-cover w-full h-full hover:scale-110 duration-200"
-              />
-              {/* <div className="absolute inset-0 bg-neutral-900 bg-opacity-60 flex items-center justify-center">
-                <span className="text-white font-bold">Basquete</span>
-              </div> */}
-            </a>
+          <a
+            href=""
+            className="relative w-full h-[172px] rounded-[33px] overflow-hidden group"
+          >
+            <img
+              loading="lazy"
+              src={
+                "https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&"
+              }
+              alt={"imagem de esporte"}
+              className="object-cover w-full h-full group-hover:scale-110 duration-200 relative "
+            />
+            <div className="absolute inset-0 bg-neutral-900 bg-opacity-60 flex items-center justify-center">
+              <span className="text-white font-bold">Basquete</span>
+            </div>
+          </a>
         </div>
         <div className="w-full max-w-7xl mt-12 lg:mt-24">
           <h2 className="text-2xl font-bold mb-4 text-left">Horários</h2>
