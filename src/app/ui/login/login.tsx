@@ -72,7 +72,7 @@ export default function LoginComponent({
             </span>
           </label>
           <input
-            className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[42px]"
+            className="shrink-0 mt-1 rounded-sm bg-zinc-100 h-[36px] outline-none"
             name="email"
             id="email"
           />
@@ -86,7 +86,7 @@ export default function LoginComponent({
             name="password"
             id="password"
             type="password"
-            className="shrink-0 mt-2 rounded-sm bg-zinc-100 h-[42px]"
+            className="shrink-0 mt-2 rounded-sm bg-zinc-100 h-[36px] outline-none"
           />
           <button
             type="submit"

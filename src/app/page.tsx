@@ -10,9 +10,9 @@ export default async function Home() {
   const session: any = await sessionInfo();
   console.log(session);
 
-  if (session != null) {
-    redirect("/schools");
-  }
+  // if (session != null) {
+  //   redirect("/schools");
+  // }
   return (
     <>
       <main className="flex flex-col items-center justify-center w-full min-h-screen p-4 pt-20 my-12 gap-[120px]">

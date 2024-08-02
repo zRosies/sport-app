@@ -96,7 +96,7 @@ const Register = ({
           id="email"
           name="email"
           required
-          className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[42px] px-2"
+          className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[36px] outline-none px-2"
         />
         <label
           htmlFor="password"
@@ -112,7 +112,7 @@ const Register = ({
           id="password"
           name="password"
           required
-          className="shrink-0 mt-2 rounded-sm bg-zinc-100 h-[42px] px-2"
+          className="shrink-0 mt-2 rounded-sm bg-zinc-100 h-[36px] outline-none px-2"
         />
         <label
           htmlFor="password2"
@@ -128,7 +128,7 @@ const Register = ({
           id="password2"
           name="password2"
           required
-          className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[42px] px-2"
+          className="shrink-0 mt-2.5 rounded-sm bg-zinc-100 h-[36px] outline-none px-2"
         />
         <p className="text-red-500">{error.message && error.message}</p>
         <button

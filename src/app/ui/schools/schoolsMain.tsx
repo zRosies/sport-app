@@ -90,14 +90,14 @@ export default function SchoolsMain({
           )}
         </div>
       ) : (
-        <div className="flex justify-center flex-col  ">
+        <div className="flex justify-center flex-col content-center items-center ">
           <p className="text-center">
             Não se inscreveu em nenhuma instituição ainda?
           </p>
           <BallIcon />
           <button
             type="button"
-            className="bg-[#197967] hover:bg-[#308d7c] duration-200 text-white w-[200px] p-3 mx-auto rounded-md font-semibold"
+            className="bg-[#197967] hover:bg-[#308d7c] duration-200 text-white w-[180px] p-3 mx-auto rounded-md font-semibold my-12"
             onClick={() => {
               window.scrollTo({ top: 1000, behavior: "smooth" });
             }}
