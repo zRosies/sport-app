@@ -1,3 +1,4 @@
+import { transform } from "next/dist/build/swc";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -30,6 +31,7 @@ const config: Config = {
       },
       animation: {
         loading: "loading .8s linear infinite",
+        fadeIn: "fadeIn 0.2s forwards",
       },
       keyframes: {
         loading: {
@@ -38,6 +40,17 @@ const config: Config = {
           },
           "100%": {
             transform: "rotate(360deg)",
+          },
+        },
+        fadeIn: {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0)",
+          },
+          "100%": {
+            display: "flex",
+            transform: "scale(1.10)",
+            opacity: "1",
           },
         },
       },

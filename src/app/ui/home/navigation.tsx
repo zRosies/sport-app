@@ -9,10 +9,38 @@ import { useRouter } from "next/router";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import BlackBackground from "../utils/blackBackground";
+import { FaFlagCheckered } from "react-icons/fa";
+import { CiBookmark } from "react-icons/ci";
+import { RiDashboardFill } from "react-icons/ri";
+import { FaBookmark } from "react-icons/fa";
 
 export default function Navigation() {
   const pathname = usePathname();
   const [openPlus, setOpenPlus] = useState<boolean>(false);
+
+  const mobNav = [
+    {
+      // @ts-ignore
+      icon: <FaFlagCheckered className="h-5 w-5" />,
+      delay: ".05s",
+      margin: "30px",
+      href: "/schools",
+    },
+    {
+      // @ts-ignore
+      icon: <FaBookmark className="h-5 w-5" />,
+      delay: ".1s",
+      href: "/schools",
+    },
+
+    {
+      // @ts-ignore
+      icon: <RiDashboardFill className="h-5 w-5" />,
+      delay: ".2s",
+      margin: "30px",
+      href: "/schools",
+    },
+  ];
 
   //   console.log(pathname);
 
@@ -44,7 +72,19 @@ export default function Navigation() {
         </Link>
       </section>
       <BlackBackground display={openPlus} setDisplay={setOpenPlus}>
-        <p></p>
+        <section className="flex flex-col-reverse justify-center items-end w-[100px] gap-5 z-[200] fixed bottom-[2%] left-[52%] translate-x-[-50%] translate-y-[-50%]">
+          {mobNav.map((icon, index) => (
+            <Link
+              href={icon.href}
+              key={index}
+              className={` opacity-0 bg-six h-12 w-12 justify-center animate-fadeIn flex items-center rounded-[50%]  text-white shadow-md hover:bg-primary duration-200`}
+              style={{ animationDelay: icon.delay, marginRight: icon.margin }}
+              onClick={() => setOpenPlus(false)}
+            >
+              {icon.icon}
+            </Link>
+          ))}
+        </section>
       </BlackBackground>
     </>
   );

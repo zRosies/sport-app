@@ -25,7 +25,7 @@ export default async function RootLayout({
     <AuthProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Header session={session} />
+          <Header />
           {children}
           <Footer />
         </body>
