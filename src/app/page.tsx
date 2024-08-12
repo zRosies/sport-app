@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import variable from "./styles/variables.module.scss";
+import { FaPlus } from "react-icons/fa6";
 
 export default function Home() {
   return (
@@ -27,29 +28,69 @@ export default function Home() {
               </button>
             </div>
           </div>
-          <div className="flex-1">
-            <img
+          <div className="flex-1 relative">
+            <Image
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e4fd0d4e29fd05c7f114a5386695f313b4af131fb3099907d7c0538b1df0c42?apiKey=5366c3b10aa44bf192572735faff851c&"
-              alt="Descrição da imagem"
-              className="w-full h-auto"
+              alt="Various sports"
+              width={800} // Set the desired width
+              height={600} // Set the desired height
             />
           </div>
         </div>
-        <div className="flex flex-col gap-5 mt-6 w-full max-w-7xl">
+        <div className="flex flex-col gap-5 mt-6 w-full max-w-7xl relative">
             <a
               href=""
-              className="relative w-full h-[172px] rounded-[33px] overflow-hidden bg-[black]"
+              className="relative w-full h-[172px] rounded-[33px] overflow-hidden bg-black bg-opacity-80"
             >
-              <img
+              <Image
                 loading="lazy"
-                src={"https://cdn.builder.io/api/v1/image/assets/TEMP/012569ed1732005c8d868b37311ec95aea3eedc6785307ef3094a18010dfc658?apiKey=5366c3b10aa44bf192572735faff851c&"}
+                src={"/basquete.png"}
                 alt={"imagem de esporte"}
                 className="object-cover w-full h-full hover:scale-110 duration-200"
+                width={800} // Set the desired width
+                height={600} // Set the desired height
               />
-              {/* <div className="absolute inset-0 bg-neutral-900 bg-opacity-60 flex items-center justify-center">
-                <span className="text-white font-bold">Basquete</span>
-              </div> */}
+              <p className="absolute top-[45%] left-[05%] z-[100] text-white font-extrabold text-[20px]">
+              BASQUETE
+              </p>
             </a>
+            <a
+              href=""
+              className="relative w-full h-[172px] rounded-[33px] overflow-hidden bg-black bg-opacity-80"
+            >
+              <Image
+                loading="lazy"
+                src={"/tenis.png"}
+                alt={"imagem de esporte"}
+                className="object-cover w-full h-full hover:scale-110 duration-200"
+                width={800} // Set the desired width
+                height={600} // Set the desired height
+              />
+              <p className="absolute top-[45%] right-[05%] z-[100] text-white font-extrabold text-[20px]">
+              TENIS
+              </p>
+            </a>
+            <a
+              href=""
+              className="relative w-full h-[172px] rounded-[33px] overflow-hidden bg-black bg-opacity-80"
+            >
+              <Image
+                loading="lazy"
+                src={"/futsal.png"}
+                alt={"imagem de esporte"}
+                className="object-cover w-full h-full hover:scale-110 duration-200"
+                width={800} // Set the desired width
+                height={600} // Set the desired height
+              />
+              <p className="absolute top-[45%] left-[05%] z-[100] text-white font-extrabold text-[20px]">
+              FUTEBOL
+              </p>
+            </a>
+            <div className="flex justify-end mt-4 space-x-4">
+              <button className="justify-center gap-1 items-center flex px-4 py-2 bg-[#197967] text-white rounded hover:bg-[#1ABF7A] hover:border-[#1ABF7A] duration-200 w-[200px]">
+              Mais esportes <FaPlus/>
+              </button>
+            </div>
         </div>
         <div className="w-full max-w-7xl mt-12 lg:mt-24">
           <h2 className="text-2xl font-bold mb-4 text-left">Horários</h2>
