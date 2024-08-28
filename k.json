@@ -1,0 +1,26 @@
+{
+  "usuario": {
+    "id": "unique_user_id",
+    "primeiro_nome": "John",
+    "sobrenome": "Doe",
+    "email": "john.doe@example.com",
+    "password": "hashed_password",
+    "data_nascimento": "YYYY-MM-DD",
+    "celular": "123-456-7890",
+    "foto_perfil": "profile_picture_url",
+    "cpf": "123.456.789-00",
+    "genero": "male"
+  },
+  "endereco": {
+    "uf": "SP",
+    "cidade": "São Paulo",
+    "cep": "01000-000"
+  },
+  "escolas": [
+    {
+      "students": [],
+      "subscriptions": [],
+      "funcao": ["admin", "professor"]
+    }
+  ]
+}
