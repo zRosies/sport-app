@@ -50,7 +50,7 @@ export async function sendSubscription(schoolId: string, userId: string) {
   const userColllection = await initDb("sport-app", "escola");
   const response = await userColllection.updateOne(
     { id: schoolId },
-    { $push: { subscriptions: userId } }
+    { $push: { subscriptions: userId as any } }
   );
 
   console.log(userId, schoolId);
