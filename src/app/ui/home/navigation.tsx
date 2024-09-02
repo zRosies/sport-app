@@ -13,6 +13,8 @@ import { FaFlagCheckered } from "react-icons/fa";
 import { CiBookmark } from "react-icons/ci";
 import { RiDashboardFill } from "react-icons/ri";
 import { FaBookmark } from "react-icons/fa";
+import { ImExit } from "react-icons/im";
+import { signOut } from "next-auth/react";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -34,11 +36,11 @@ export default function Navigation() {
     },
 
     {
-      // @ts-ignore
-      icon: <RiDashboardFill className="h-5 w-5" />,
+      icon: <ImExit className="h-5 w-5" />,
       delay: ".2s",
       margin: "30px",
-      href: "/schools",
+      href: "/",
+      onclick: () => signOut(),
     },
   ];
 
@@ -79,7 +81,10 @@ export default function Navigation() {
               key={index}
               className={` opacity-0 bg-six h-12 w-12 justify-center animate-fadeIn flex items-center rounded-[50%]  text-white shadow-md hover:bg-primary duration-200`}
               style={{ animationDelay: icon.delay, marginRight: icon.margin }}
-              onClick={() => setOpenPlus(false)}
+              onClick={() => {
+                icon.onclick && icon.onclick();
+                setOpenPlus(false);
+              }}
             >
               {icon.icon}
             </Link>
