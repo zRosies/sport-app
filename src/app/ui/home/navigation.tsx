@@ -44,30 +44,28 @@ export default function Navigation() {
     },
   ];
 
-  //   console.log(pathname);
-
   return (
     <>
       <section className="fixed bottom-0 flex bg-white w-full shadow-nav left-0 justify-center py-4 gap-5 items-center z-[5]">
         <Link href={"/"} className="relative">
           {/* @ts-ignore */}
-          <RiHome6Line className="h-[36px] w-[36px] text-secondary" />
+          <RiHome6Line className="h-[24px] w-[24px] text-secondary" />
           {pathname.replace("/", "").length == 0 && (
             <span className="w-10 p-[0.08rem] rounded-md absolute bottom-[-0.4rem] left-[50%] bg-primary transform -translate-x-1/2 -translate-y-1/2"></span>
           )}
         </Link>
         <div
-          className="flex p-3 rounded-[50%] bg-six text-white hover:bg-primary cursor-pointer duration-200"
+          className="flex p-2 rounded-[50%] bg-six text-white hover:bg-primary cursor-pointer duration-200"
           onClick={() => {
             setOpenPlus(true);
           }}
         >
           {/* @ts-ignore */}
-          <FaPlus className="h-8 w-8" />
+          <FaPlus className="h-6 w-6" />
         </div>
         <Link href={"/profile"} className="relative">
           {/* @ts-ignore */}
-          <RxAvatar className="h-[36px] w-[36px] text-secondary" />
+          <RxAvatar className="h-[24px] w-[24px] text-secondary" />
           {pathname.includes("profile") && (
             <span className="w-10 p-[0.08rem] rounded-md absolute bottom-[-0.4rem] left-[50%] bg-primary transform -translate-x-1/2 -translate-y-1/2"></span>
           )}

@@ -19,3 +19,19 @@ export async function getAvailableClasses(classId: string) {
 
   return NextResponse.json(classInfo, { status: 200 });
 }
+
+export async function getStudentClasses(userId: string) {
+  const classCollection = await initDb("sport-app", "aula_aluno");
+  const classInfo = await classCollection.findOne({ aluno_id: userId });
+
+  if (!classInfo) {
+    return NextResponse.json(
+      {
+        message: `No class found with id ${userId}`,
+      },
+      { status: 404 }
+    );
+  }
+
+  return NextResponse.json(classInfo, { status: 200 });
+}

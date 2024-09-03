@@ -2,12 +2,18 @@ import { getSchoolInfo, SchoolInfo } from "@/app/api/controllers/school";
 import Image from "next/image";
 import * as React from "react";
 
-export default async function SchoolHeader({ schoolId }: { schoolId: string }) {
+export default async function SchoolHeader({
+  schoolId,
+  booking,
+}: {
+  schoolId: string;
+  booking: number;
+}) {
   const data = await getSchoolInfo(schoolId);
-
   const schoolInfo: SchoolInfo = await data.json();
+
   return (
-    <div className="flex flex-col rounded-none w-[90%] mx-auto content-center">
+    <div className="flex flex-col rounded-none  content-center">
       <div className="flex gap-5 justify-between content-center py-3 px-8 w-full bg-white rounded-md shadow-[1px_4px_4px_rgba(0,0,0,0.25)]">
         <div className="flex gap-4 items-center text-black">
           {schoolInfo.logo_pic ? (
@@ -34,7 +40,7 @@ export default async function SchoolHeader({ schoolId }: { schoolId: string }) {
           </div>
         </div>
         <div className=" mt-6 text-base font-medium text-center bg-primary rounded-md items-center flex justify-center h-[35px] min-h-[35px] text-zinc-100 w-[35px]">
-          5
+          {booking}
         </div>
       </div>
     </div>

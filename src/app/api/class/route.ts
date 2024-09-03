@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getStudentClasses } from "../controllers/class";
 
 export async function POST(req: Request) {
   const apiKey = req.headers.get("apiKey");
@@ -10,7 +11,9 @@ export async function POST(req: Request) {
     );
   }
   try {
-    return "response";
+    const { student_id } = await req.json();
+    const response = await getStudentClasses(student_id);
+    return response;
   } catch (error: any) {
     throw new Error(error.message);
   }

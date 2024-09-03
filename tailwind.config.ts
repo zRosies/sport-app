@@ -32,6 +32,7 @@ const config: Config = {
       animation: {
         loading: "loading .8s linear infinite",
         fadeIn: "fadeIn 0.2s forwards",
+        display: "display 0.2s ease",
       },
       keyframes: {
         loading: {
@@ -50,6 +51,17 @@ const config: Config = {
           "100%": {
             display: "flex",
             transform: "scale(1.10)",
+            opacity: "1",
+          },
+        },
+        display: {
+          "0%": {
+            opacity: "0",
+            transform: "translate(-50%, -50%) scale(0)",
+          },
+          "100%": {
+            display: "flex",
+            transform: "translate(-50%, -50%) scale(1)",
             opacity: "1",
           },
         },
