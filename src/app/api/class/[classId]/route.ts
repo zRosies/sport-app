@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getAvailableClasses } from "../../controllers/class";
 import { RequestContext } from "next/dist/server/base-server";
+import { subscribeInClass } from "../../controllers/school";
 
 export async function GET(
   req: Request,
@@ -16,6 +17,24 @@ export async function GET(
   }
   try {
     const response = await getAvailableClasses(context.params.classId);
+    return response;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function POST(req: Request, context: any) {
+  const apiKey = req.headers.get("apiKey");
+
+  if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
+    return NextResponse.json(
+      { message: "You have no permission to perform this operation" },
+      { status: 403 }
+    );
+  }
+
+  try {
+    const response = await subscribeInClass(context.params.schoolId, "");
     return response;
   } catch (error: any) {
     throw new Error(error.message);

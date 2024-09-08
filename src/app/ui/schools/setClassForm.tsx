@@ -1,17 +1,170 @@
+import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
+import { AvailableClass } from "./classInfo";
+import { FormEvent, SyntheticEvent, useState } from "react";
+import { MdOutlineReportGmailerrorred } from "react-icons/md";
 
 export default function SetClassForm({
   setDisplay,
+  availableClasses,
 }: {
   setDisplay: (variable: boolean) => void;
+  availableClasses: AvailableClass[];
 }) {
+  const weekdays = [
+    "domingo",
+    "segunda",
+    "terça",
+    "quarta",
+    "quinta",
+    "sexta",
+    "sábado",
+  ];
+  const availableDays = ["segunda", "terça", "quarta", "quinta", "sexta"];
+
+  // Use an array to manage errors for each class
+  const [dateErrors, setDateErrors] = useState<string[]>([]);
+
+  function disableUnavailableDates(
+    e: any,
+    days_available: string[],
+    index: number
+  ) {
+    const selectedDay = new Date(e.target.value);
+    const selectedDateIndex = selectedDay.getUTCDay();
+    const selectedDate = weekdays[selectedDateIndex];
+
+    if (!days_available.includes(selectedDate)) {
+      const newErrors = [...dateErrors];
+      newErrors[
+        index
+      ] = `${selectedDate} não está disponível em sua instituição`;
+      setDateErrors(newErrors);
+      return;
+    }
+
+    const newErrors = [...dateErrors];
+    newErrors[index] = "";
+    setDateErrors(newErrors);
+  }
+
+  async function EnrollInClass(
+    e: React.FormEvent<HTMLFormElement>,
+    classItem: AvailableClass,
+    index: number
+  ) {
+    e.preventDefault();
+    const selectedDate = e.currentTarget.elements.namedItem(
+      "date"
+    ) as HTMLFormElement;
+    console.log(classItem);
+    console.log(selectedDate.value);
+
+    if (!selectedDate.value) {
+      const currentError = [...dateErrors];
+      currentError[index] = "Selecione uma data antes de se inscrever!";
+      setDateErrors(currentError);
+      return;
+    }
+
+    setDateErrors([...dateErrors, (dateErrors[index] = "")]);
+
+    const response = await fetch("/api/class/enroll", {
+      method: "POST",
+      // body: {},
+    });
+  }
+
   return (
-    <div className="bg-white w-[500px] h-[200px] absolute z-[100] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 rounded-md animate-display">
+    <div className="bg-white w-[500px] h-[500px] absolute z-[100] top-[] left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 rounded-md animate-display">
       <div className="flex justify-between">
-        <p className="font-bold text-[0.70rem]">MARCAR AULA</p>
+        <p className="font-bold text-[0.70rem] ">MARCAR AULA</p>
 
         <IoMdClose onClick={() => setDisplay(false)} />
       </div>
+      <section className="flex flex-col max-h-[500px] w-full overflow-y-auto gap-3 box-border mt-6">
+        {availableClasses.map((classItem, index) => {
+          return (
+            <form
+              onSubmit={(e) => EnrollInClass(e, classItem, index)}
+              className="p-2 flex shadow-md rounded-md h-[193px] w-[98%] mx-auto bg-white gap-6"
+              key={index}
+            >
+              <div>
+                <div className="w-[123px] h-[103px] rounded-md overflow-hidden ">
+                  <Image
+                    src={classItem.aula.picture}
+                    alt="image"
+                    width={200}
+                    height={200}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <p className="text-[0.7rem] text-start mt-4">
+                  Professor:{classItem.aula.professor_name.split(" ")[0]}
+                </p>
+                <p className="text-[0.7rem] text-start">
+                  Quadra: {classItem.aula.quadra.tipo}
+                </p>
+              </div>
+
+              <div className="w-full flex flex-col justify-between">
+                <div className="flex gap-5 flex-col">
+                  <p className="text-center font-bold">
+                    {classItem.aula.modalidade}
+                  </p>
+                  <div className=" flex flex-col gap-2 text-[0.7rem]">
+                    <p>
+                      Horário: {classItem.aula.data.horario_inicio} -{" "}
+                      {classItem.aula.data.horario_fim}{" "}
+                    </p>
+                    <div className="w-full flex items-center gap-2 text-[0.7rem]">
+                      <p>Dias Disponíveis:</p>
+                      <div>
+                        {availableDays.map((weekday) => (
+                          <span
+                            key={weekday} // Add a key for better React rendering
+                            className={`text-[0.5rem] px-2 py-[0.3rem] rounded-full  ${
+                              classItem.aula.days_available.includes(weekday)
+                                ? "bg-primary"
+                                : "bg-gray-300"
+                            } text-white mx-[0.1rem]`}
+                          >
+                            {weekday.charAt(0).toUpperCase()}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex gap-2 justify-between border-[1px] border-[#3a3a3a] p-1 box-border text-[0.7rem]">
+                      <p>Selecionar data:</p>
+                      <input
+                        type="date"
+                        name="date"
+                        onChange={(e) =>
+                          disableUnavailableDates(
+                            e,
+                            classItem.aula.days_available,
+                            index // Pass the index to track which class
+                          )
+                        }
+                      />
+                    </div>
+                    {dateErrors[index] && (
+                      <span className="text-[0.6rem] flex gap-2 text-red-500 items-center">
+                        <MdOutlineReportGmailerrorred /> {dateErrors[index]}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <button className="bg-six text-white w-full p-[0.4rem] rounded-md text-[0.85rem] font-semibold">
+                  Inscrever-me
+                </button>
+              </div>
+            </form>
+          );
+        })}
+      </section>
     </div>
   );
 }

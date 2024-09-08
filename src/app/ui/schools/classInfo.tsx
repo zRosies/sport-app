@@ -5,16 +5,16 @@ import Image from "next/image";
 import SchoolHeader from "./classHeader";
 import { useState } from "react";
 
-export interface ClassInfo {
+export interface AvailableClass {
   _id: string;
   school_id: string;
   id: string;
   aula: {
     modalidade: string;
-    picture?: string;
+    picture: string;
     quadra: {
       tipo: string;
-      numero: number;
+      numero: string;
     };
     data: {
       horario_inicio: string;
@@ -23,6 +23,8 @@ export interface ClassInfo {
       alunos: string[];
     };
     professor_id: string;
+    professor_name: string;
+    days_available: string[];
   };
 }
 
@@ -92,14 +94,14 @@ export default function SchoolInfo({
                 <div className="flex gap-3 text-[0.9rem]">
                   <button
                     type="button"
-                    className="px-1 py-1 bg-[#ec5a5a] text-white rounded-sm flex items-center gap-2 w-[130px] text-center justify-center"
+                    className="px-1 py-1 bg-[#c45353] hover:bg-[#da6161] duration-300 text-white rounded-sm flex items-center gap-2 w-[130px] text-center justify-center"
                     onClick={() => {}}
                   >
                     Desmarcar <FaTrashAlt />
                   </button>
                   <button
                     type="button"
-                    className="px-1 py-1 bg-forth text-white rounded-sm flex items-center gap-2 w-[130px] justify-center"
+                    className="px-1 py-1 bg-six text-white rounded-sm flex items-center gap-2 w-[130px] justify-center"
                   >
                     Remarcar <LuClock />
                   </button>

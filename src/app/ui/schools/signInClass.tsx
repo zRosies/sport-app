@@ -3,8 +3,13 @@ import { useState } from "react";
 import { FaFlagCheckered } from "react-icons/fa";
 import BlackBackground from "../utils/blackBackground";
 import SetClassForm from "./setClassForm";
+import { AvailableClass } from "./classInfo";
 
-export function SignInClass() {
+export function SignInClass({
+  availableClasses,
+}: {
+  availableClasses: AvailableClass[];
+}) {
   const [display, setDisplay] = useState<boolean>(false);
   return (
     <>
@@ -19,7 +24,10 @@ export function SignInClass() {
         </span>
       </button>
       <BlackBackground setDisplay={setDisplay} display={display}>
-        <SetClassForm setDisplay={setDisplay} />
+        <SetClassForm
+          setDisplay={setDisplay}
+          availableClasses={availableClasses}
+        />
       </BlackBackground>
     </>
   );
