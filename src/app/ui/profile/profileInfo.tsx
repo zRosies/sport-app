@@ -44,7 +44,6 @@ const ProfileInfo = ({ user }: { user: User }) => {
       },
       body: JSON.stringify(updateUser),
     });
-    console.log(response);
 
     if (response.ok) {
       console.log(response);

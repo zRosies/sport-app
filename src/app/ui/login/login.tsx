@@ -33,8 +33,6 @@ export default function LoginComponent({
       const password = (form.elements.namedItem("password") as HTMLInputElement)
         .value;
 
-      console.log(password, email);
-
       const response = await signIn("credentials", {
         redirect: false,
         email,

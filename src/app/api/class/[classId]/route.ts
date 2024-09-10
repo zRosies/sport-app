@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { getAvailableClasses } from "../../controllers/class";
+import { getAvailableClasses, subscribeInClass } from "../../controllers/class";
 import { RequestContext } from "next/dist/server/base-server";
-import { subscribeInClass } from "../../controllers/school";
 
 export async function GET(
   req: Request,
@@ -33,8 +32,13 @@ export async function POST(req: Request, context: any) {
     );
   }
 
+  const userInfo = await req.json();
+  const studentId = context.params.classId;
+
+  console.log(userInfo);
+
   try {
-    const response = await subscribeInClass(context.params.schoolId, "");
+    const response = await subscribeInClass(studentId, userInfo);
     return response;
   } catch (error: any) {
     throw new Error(error.message);

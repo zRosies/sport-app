@@ -1,16 +1,23 @@
 import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
-import { AvailableClass } from "./classInfo";
+import { AvailableClass, StudentClasses } from "./classInfo";
 import { FormEvent, SyntheticEvent, useState } from "react";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
+import { useSession } from "next-auth/react";
 
 export default function SetClassForm({
   setDisplay,
   availableClasses,
+  school_id,
+  studentClasses,
 }: {
+  school_id: string;
+  studentClasses: StudentClasses;
   setDisplay: (variable: boolean) => void;
   availableClasses: AvailableClass[];
 }) {
+  console.log(JSON.stringify(studentClasses.agendamentos_disponiveis));
+  const session = useSession() as any;
   const weekdays = [
     "domingo",
     "segunda",
@@ -38,7 +45,7 @@ export default function SetClassForm({
       const newErrors = [...dateErrors];
       newErrors[
         index
-      ] = `${selectedDate} não está disponível em sua instituição`;
+      ] = `${selectedDate} não está disponível na aula selecionada.`;
       setDateErrors(newErrors);
       return;
     }
@@ -54,13 +61,19 @@ export default function SetClassForm({
     index: number
   ) {
     e.preventDefault();
-    const selectedDate = e.currentTarget.elements.namedItem(
-      "date"
-    ) as HTMLFormElement;
-    console.log(classItem);
-    console.log(selectedDate.value);
+    const selectedDate = (
+      e.currentTarget.elements.namedItem("date") as HTMLFormElement
+    ).value;
 
-    if (!selectedDate.value) {
+    if (studentClasses.agendamentos_disponiveis < 1) {
+      const newErrors = [...dateErrors];
+      newErrors[index] = `Você não tem agendamentos disponíveis!`;
+      setDateErrors(newErrors);
+      console.log("aaaaaa");
+      return;
+    }
+
+    if (!selectedDate) {
       const currentError = [...dateErrors];
       currentError[index] = "Selecione uma data antes de se inscrever!";
       setDateErrors(currentError);
@@ -69,14 +82,21 @@ export default function SetClassForm({
 
     setDateErrors([...dateErrors, (dateErrors[index] = "")]);
 
-    const response = await fetch("/api/class/enroll", {
+    const response = await fetch(`/api/class/${session.data?.user.userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        apiKey: `${process.env.NEXT_PUBLIC_API_TOKEN}`,
+      },
+
       method: "POST",
-      // body: {},
+      body: JSON.stringify({ ...classItem, date: selectedDate }),
     });
+
+    // console.log(response);
   }
 
   return (
-    <div className="bg-white w-[500px] h-[500px] absolute z-[100] top-[] left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 rounded-md animate-display">
+    <div className="bg-white w-[500px] h-[500px] absolute z-[100] top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 rounded-md animate-display">
       <div className="flex justify-between">
         <p className="font-bold text-[0.70rem] ">MARCAR AULA</p>
 
@@ -100,11 +120,12 @@ export default function SetClassForm({
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <p className="text-[0.7rem] text-start mt-4">
-                  Professor:{classItem.aula.professor_name.split(" ")[0]}
+                <p className="text-[0.7rem] text-start mt-4 flex justify-between px-1">
+                  Professor(a):
+                  <p>{classItem.aula.professor_name.split(" ")[0]}</p>
                 </p>
-                <p className="text-[0.7rem] text-start">
-                  Quadra: {classItem.aula.quadra.tipo}
+                <p className="text-[0.7rem] text-start flex justify-between px-1">
+                  Quadra: <p>{classItem.aula.quadra.tipo}</p>
                 </p>
               </div>
 
@@ -157,7 +178,7 @@ export default function SetClassForm({
                   </div>
                 </div>
 
-                <button className="bg-six text-white w-full p-[0.4rem] rounded-md text-[0.85rem] font-semibold">
+                <button className="bg-six text-white w-full p-[0.4rem] rounded-md text-[0.8rem] font-semibold">
                   Inscrever-me
                 </button>
               </div>

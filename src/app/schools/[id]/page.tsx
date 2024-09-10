@@ -22,15 +22,17 @@ export default async function UserDashboard({
   const promise = await getAvailableClasses(params.id);
   const availableClasses: AvailableClass[] = await promise.json();
   const schoolId = params.id;
-
   return (
     <main className="px-2 relative">
       <SchoolHeader
         schoolId={schoolId}
         booking={schoolData.agendamentos_disponiveis}
       />
-      <SchoolInfo school_id={schoolId} schoolData={schoolData} />
-      <SignInClass availableClasses={availableClasses} />
+      <SchoolInfo
+        school_id={schoolId}
+        studentClasses={schoolData}
+        availableClasses={availableClasses}
+      />
     </main>
   );
 }

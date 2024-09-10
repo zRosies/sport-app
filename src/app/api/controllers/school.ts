@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { initDb } from "../connect/mongo";
 import { User } from "@/app/ui/utils/schema";
+import { AvailableClass } from "@/app/ui/schools/classInfo";
+import { PushOperator } from "mongodb";
 export type SchoolInfo = {
   modalities: {}[];
   name: string;
@@ -68,28 +70,6 @@ export async function sendSubscription(schoolId: string, userId: string) {
       { status: 400 }
     );
   }
-
-  return NextResponse.json(
-    { message: "Subscription sent successfully" },
-    { status: 201 }
-  );
-}
-
-export async function subscribeInClass(schoolId: string, user: any) {
-  const aulasCollection = await initDb("sport-app", "aulas");
-  const aula_aluno = await initDb("sport-app", "aulas");
-
-  const updateAula = await aulasCollection.updateOne(
-    { schoolId: schoolId },
-    { $push: { "aula.data.alunos": user.userId } }
-  );
-
-  // if (response.modifiedCount < 1) {
-  //   return NextResponse.json(
-  //     { message: "Bad Request! Review the payload!" },
-  //     { status: 400 }
-  //   );
-  // }
 
   return NextResponse.json(
     { message: "Subscription sent successfully" },
