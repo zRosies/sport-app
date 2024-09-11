@@ -14,7 +14,7 @@ export default async function Schools() {
   }
   return (
     <>
-      <SchoolsMain schools={schoolData} userId={session.user.userId} />{" "}
+      <SchoolsMain schools={schoolData} userId={session.user.userId} />
     </>
   );
 }

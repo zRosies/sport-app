@@ -6,6 +6,7 @@ import AuthProvider from "./sessionProvider";
 import { headers } from "next/headers";
 import { sessionInfo } from "./api/auth/[...nextauth]/options";
 import Header from "./ui/home/header";
+import Navigation from "./ui/home/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,13 +20,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await sessionInfo();
+
+  console.log(session);
   return (
     <AuthProvider>
       <html lang="en">
         <body className={inter.className}>
-          <Header />
+          {session ? <Navigation /> : <Header session={session} />}
           {children}
-          <Footer />
+          {!session && <Footer />}
         </body>
       </html>
     </AuthProvider>

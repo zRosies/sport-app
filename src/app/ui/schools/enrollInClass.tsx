@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { IoMdClose } from "react-icons/io";
-import { AvailableClass, StudentClasses } from "./classInfo";
+import { AvailableClass, StudentClasses } from "./enrolledClasses";
 import { FormEvent, SyntheticEvent, useState } from "react";
 import { MdOutlineReportGmailerrorred } from "react-icons/md";
 import { useSession } from "next-auth/react";
+import BlackBackground from "../utils/blackBackground";
+import EnrollSuccess from "./enrollMessage";
 
 export default function SetClassForm({
   setDisplay,
@@ -31,6 +33,7 @@ export default function SetClassForm({
 
   // Use an array to manage errors for each class
   const [dateErrors, setDateErrors] = useState<string[]>([]);
+  const [sucessMessage, setSucessMessage] = useState<boolean>(false);
 
   function disableUnavailableDates(
     e: any,
@@ -80,6 +83,8 @@ export default function SetClassForm({
       return;
     }
 
+    const [year, month, day] = selectedDate.split("-");
+
     setDateErrors([...dateErrors, (dateErrors[index] = "")]);
 
     const response = await fetch(`/api/class/${session.data?.user.userId}`, {
@@ -89,29 +94,35 @@ export default function SetClassForm({
       },
 
       method: "POST",
-      body: JSON.stringify({ ...classItem, date: selectedDate }),
+      body: JSON.stringify({ ...classItem, date: `${day}/${month}/${year}` }),
     });
 
+    if (response.status === 201) {
+      setSucessMessage(true);
+    }
     // console.log(response);
   }
 
   return (
-    <div className="bg-white w-[500px] h-[500px] absolute z-[100] top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 rounded-md animate-display">
+    <div className="bg-white w-full box-border max-w-[500px] h-[500px] absolute z-[100] top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-3 rounded-md animate-display overflow-hidden">
       <div className="flex justify-between">
         <p className="font-bold text-[0.70rem] ">MARCAR AULA</p>
 
         <IoMdClose onClick={() => setDisplay(false)} />
       </div>
-      <section className="flex flex-col max-h-[500px] w-full overflow-y-auto gap-3 box-border mt-6">
+      <section
+        className="flex flex-col h-full max-h-[430px] w-full overflow-y-auto  gap-3 box-border mt-4 py-3 custom-scrollbar"
+        style={{ scrollbarWidth: "thin" }}
+      >
         {availableClasses.map((classItem, index) => {
           return (
             <form
               onSubmit={(e) => EnrollInClass(e, classItem, index)}
-              className="p-2 flex shadow-md rounded-md h-[193px] w-[98%] mx-auto bg-white gap-6"
+              className="p-2 flex shadow-md rounded-md h-[193px] w-[98%] mx-auto bg-white gap-2 md:gap-6"
               key={index}
             >
               <div>
-                <div className="w-[123px] h-[103px] rounded-md overflow-hidden ">
+                <div className="maw-w-[123px] h-[103px] rounded-md overflow-hidden ">
                   <Image
                     src={classItem.aula.picture}
                     alt="image"
@@ -129,12 +140,12 @@ export default function SetClassForm({
                 </p>
               </div>
 
-              <div className="w-full flex flex-col justify-between">
-                <div className="flex gap-5 flex-col">
+              <div className="w-full flex flex-col gap-3">
+                <div className="flex gap-2 md:gap-5 flex-col">
                   <p className="text-center font-bold">
                     {classItem.aula.modalidade}
                   </p>
-                  <div className=" flex flex-col gap-2 text-[0.7rem]">
+                  <div className=" flex flex-col gap-2 text-[0.7rem] relative">
                     <p>
                       Horário: {classItem.aula.data.horario_inicio} -{" "}
                       {classItem.aula.data.horario_fim}{" "}
@@ -157,7 +168,7 @@ export default function SetClassForm({
                       </div>
                     </div>
                     <div className="flex gap-2 justify-between border-[1px] border-[#3a3a3a] p-1 box-border text-[0.7rem]">
-                      <p>Selecionar data:</p>
+                      <p className="text-[0.7rem]">Selecionar data:</p>
                       <input
                         type="date"
                         name="date"
@@ -171,14 +182,14 @@ export default function SetClassForm({
                       />
                     </div>
                     {dateErrors[index] && (
-                      <span className="text-[0.6rem] flex gap-2 text-red-500 items-center">
+                      <span className="text-[0.6rem] flex gap-2 text-red-500 items-center absolute bottom-[-13px]">
                         <MdOutlineReportGmailerrorred /> {dateErrors[index]}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <button className="bg-six text-white w-full p-[0.4rem] rounded-md text-[0.8rem] font-semibold">
+                <button className="bg-six hover:bg-secondary duration-200 text-white w-full p-[0.4rem] rounded-md text-[0.8rem] font-semibold">
                   Inscrever-me
                 </button>
               </div>
@@ -186,6 +197,11 @@ export default function SetClassForm({
           );
         })}
       </section>
+      {sucessMessage && (
+        <BlackBackground display={sucessMessage} setDisplay={setSucessMessage}>
+          <EnrollSuccess hideSuccessfulMessage={setSucessMessage} />
+        </BlackBackground>
+      )}
     </div>
   );
 }

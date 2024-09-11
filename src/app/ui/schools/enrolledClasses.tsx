@@ -54,7 +54,7 @@ export interface StudentClasses {
   }[];
 }
 
-export default function SchoolInfo({
+export default function EnrolledClasses({
   school_id,
   studentClasses,
   availableClasses,
@@ -74,9 +74,9 @@ export default function SchoolInfo({
             {studentClasses.agendamentos.map((school, index) => (
               <div
                 key={index}
-                className="flex border-2 gap-2 md:gap-8 p-2 rounded-md shadow-md w-full max-w-[420px]"
+                className="flex border-2 gap-2 md:gap-4 p-2 rounded-md shadow-md w-full max-w-[420px]"
               >
-                <div className="w-[140px] h-[100px] overflow-hidden rounded-md">
+                <div className="w-[180px] h-[100px] overflow-hidden rounded-md">
                   {school.picture && (
                     <Image
                       src={school.picture}
@@ -88,33 +88,29 @@ export default function SchoolInfo({
                   )}
                 </div>
                 <div className="flex flex-col justify-between w-full">
-                  <div className="text-[0.8rem] justify-center flex flex-col">
+                  <div className="text-[0.8rem] justify-center flex flex-col my-4">
                     <p className="text-black font-bold text-center text-[1.1rem]">
                       {school.modalidade}
                     </p>
                     <p className="text-center text-[0.7rem]">
-                      <span className="font-medium ">Início:</span>{" "}
-                      {school.horario_inicio}
+                      {school.horario_inicio} - {school.horario_fim}
                     </p>
+
                     <p className="text-center text-[0.7rem]">
                       <span className="font-medium ">Data:</span> {school.date}
-                    </p>
-                    <p className="text-center text-[0.7rem]">
-                      <span className="font-medium text-center">Término:</span>{" "}
-                      {school.horario_fim}
                     </p>
                   </div>
                   <div className="flex gap-2 text-[0.9rem] w-full">
                     <button
                       type="button"
-                      className="px-1 py-1 bg-[#c45353] hover:bg-[#da6161] duration-300 text-white text-[0.7rem] md:text-[1rem] rounded-sm flex items-center gap-2 w-full text-center justify-center"
+                      className="px-1 py-[0.4rem] bg-[#c45353] hover:bg-[#da6161] duration-300 text-white text-[0.7rem] md:text-[.8rem] rounded-sm flex items-center gap-2 w-full text-center justify-center"
                       onClick={() => {}}
                     >
                       Desmarcar <FaTrashAlt className="h-[0.7rem] w-[0.7rem]" />
                     </button>
                     <button
                       type="button"
-                      className="px-2 py-1 bg-six text-white rounded-sm flex items-center gap-2 w-full  justify-center text-[0.7rem] md:text-[1rem]"
+                      className="px-2 py-[0.4rem] bg-six text-white rounded-sm flex items-center gap-2 w-full  justify-center text-[0.7rem] md:text-[.8rem] "
                     >
                       Remarcar <LuClock className="h-3 w-3" />
                     </button>

@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { FaFlagCheckered } from "react-icons/fa";
 import BlackBackground from "../utils/blackBackground";
-import SetClassForm from "./setClassForm";
-import { AvailableClass, StudentClasses } from "./classInfo";
+import SetClassForm from "./enrollInClass";
+import { AvailableClass, StudentClasses } from "./enrolledClasses";
 
 export function SignInClass({
   availableClasses,

@@ -1,7 +1,7 @@
-import SchoolInfo, {
+import {
   AvailableClass,
   StudentClasses,
-} from "@/app/ui/schools/classInfo";
+} from "@/app/ui/schools/enrolledClasses";
 import { sessionInfo } from "@/app/api/auth/[...nextauth]/options";
 import {
   getAvailableClasses,
@@ -9,6 +9,8 @@ import {
 } from "@/app/api/controllers/class";
 import SchoolHeader from "@/app/ui/schools/classHeader";
 import { SignInClass } from "@/app/ui/schools/signInClass";
+import EnrolledClasses from "@/app/ui/schools/enrolledClasses";
+import { redirect } from "next/navigation";
 
 export default async function UserDashboard({
   params,
@@ -16,6 +18,9 @@ export default async function UserDashboard({
   params: { id: string };
 }) {
   const session: any = await sessionInfo();
+  if (session == null) {
+    redirect("/");
+  }
   const response = await getStudentClasses(session.user.userId);
   const schoolData: StudentClasses = await response.json();
 
@@ -28,7 +33,7 @@ export default async function UserDashboard({
         schoolId={schoolId}
         booking={schoolData.agendamentos_disponiveis}
       />
-      <SchoolInfo
+      <EnrolledClasses
         school_id={schoolId}
         studentClasses={schoolData}
         availableClasses={availableClasses}

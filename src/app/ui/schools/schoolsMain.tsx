@@ -47,7 +47,7 @@ export default function SchoolsMain({
     // TODO: Search schools based on searchValue
   }
   return (
-    <main className="mx-4 flex flex-col gap-6 max-w-[600px] md:mx-auto my-[120px]">
+    <main className="mx-4 flex flex-col gap-6 max-w-[600px] md:mx-auto my-12">
       <div className="">
         <h1 className="font-bold  text-[.75rem]">CADASTRE-SE</h1>
         <p>Procure sua instituição e comece seu esporte já.</p>
