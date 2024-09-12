@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session: any = await sessionInfo();
-  console.log(session);
 
   // if (session != null) {
   //   redirect("/schools");

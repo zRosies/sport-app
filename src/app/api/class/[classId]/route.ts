@@ -1,8 +1,11 @@
-import { NextApiRequest } from "next";
-import { createUser, updateUser } from "../controllers/users";
 import { NextResponse } from "next/server";
+import { getAvailableClasses, subscribeInClass } from "../../controllers/class";
+import { RequestContext } from "next/dist/server/base-server";
 
-export async function POST(req: any) {
+export async function GET(
+  req: Request,
+  context: { params: { classId: string } }
+) {
   const apiKey = req.headers.get("apiKey");
 
   if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
@@ -11,26 +14,31 @@ export async function POST(req: any) {
       { status: 403 }
     );
   }
-
   try {
-    const { email, password } = await req.json();
-    const response = await createUser({ email: email, password: password });
+    const response = await getAvailableClasses(context.params.classId);
     return response;
   } catch (error: any) {
     throw new Error(error.message);
   }
 }
-export async function PUT(req: Request) {
+
+export async function POST(req: Request, context: any) {
   const apiKey = req.headers.get("apiKey");
+
   if (!apiKey || apiKey != process.env.NEXTAUTH_SECRET) {
     return NextResponse.json(
       { message: "You have no permission to perform this operation" },
       { status: 403 }
     );
   }
+
+  const userInfo = await req.json();
+  const studentId = context.params.classId;
+
+  console.log(userInfo);
+
   try {
-    const updatedUser = await req.json();
-    const response = await updateUser(updatedUser);
+    const response = await subscribeInClass(studentId, userInfo);
     return response;
   } catch (error: any) {
     throw new Error(error.message);

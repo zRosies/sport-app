@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 
 export default function Login() {
   const test = useSession();
-  console.log(test);
   const [translateXLogin, setTranslateX] = useState<boolean>(false);
   return (
     <>

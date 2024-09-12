@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+section.custom-scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+}
+
+section.custom-scrollbar::-webkit-scrollbar {
+  width: 2em;
+  height: 2em;
+}
+
+section.custom-scrollbar::-webkit-scrollbar-button {
+  background: #ccc;
+}
+
+section.custom-scrollbar::-webkit-scrollbar-track-piece {
+  background: #888;
+}
+
+section.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #eee;
+}

@@ -5,19 +5,6 @@ import Link from "next/link";
 import { Buffer } from "buffer";
 
 const UserSchools = ({ school }: { school: School }) => {
-  function encodeUUIDTobase64(uuid: string) {
-    const strippedUUID = uuid.replace(/-/g, "");
-    const bytes = new Uint8Array(
-      strippedUUID.match(/.{1,2}/g)!.map((byte) => parseInt(byte, 16))
-    );
-
-    // Convert to base64 and make it URL-safe
-    let base64Encoded = Buffer.from(bytes).toString("base64");
-    return (base64Encoded = base64Encoded
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=+$/, ""));
-  }
   return (
     <div className="py-6 px-3 h-[140px] shadow-lg flex justify-between rounded-md">
       <div className="flex gap-5">
@@ -51,7 +38,7 @@ const UserSchools = ({ school }: { school: School }) => {
       </div>
       <Link
         type="button"
-        href={`schools/${encodeUUIDTobase64(school.id)}`}
+        href={`schools/${school.id}`}
         className="bg-[#1977F3] hover:bg-five duration-200 text-white py-2 px-8 md:py-2 md:px-12 text-sm rounded-md flex mt-12 shadow-md items-center h-[2.4rem] font-semibold"
       >
         Acessar

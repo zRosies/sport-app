@@ -1,5 +1,16 @@
 import { NextResponse } from "next/server";
 import { initDb } from "../connect/mongo";
+import { User } from "@/app/ui/utils/schema";
+import { AvailableClass } from "@/app/ui/schools/classInfo";
+import { PushOperator } from "mongodb";
+export type SchoolInfo = {
+  modalities: {}[];
+  name: string;
+  logo_pic: string;
+  enrolled: string[];
+  subscriptions: string[];
+  id: number;
+};
 
 export async function getSchoolInfo(schoolId: string) {
   const userColllection = await initDb("sport-app", "escola");
@@ -52,8 +63,6 @@ export async function sendSubscription(schoolId: string, userId: string) {
     { id: schoolId },
     { $push: { subscriptions: userId as any } }
   );
-
-  console.log(userId, schoolId);
 
   if (response.modifiedCount < 1) {
     return NextResponse.json(

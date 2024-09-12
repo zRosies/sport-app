@@ -17,8 +17,6 @@ const AllSchools = ({ school, userId }: { school: School; userId: string }) => {
       body: JSON.stringify({ userId: userId, schoolId: schoolId }),
     });
 
-    console.log(await response.json());
-
     if (response.status == 201) {
       setSucess(true);
     }
